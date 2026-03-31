@@ -1,0 +1,75 @@
+.ctaWrapper {
+  padding: 0 1.5rem var(--section-padding-mobile); /* Top padding 0 for overlapping effect */
+  background-color: var(--color-background);
+  margin-top: -3rem; /* Small overlap */
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .ctaWrapper {
+    padding: 0 1.5rem var(--section-padding);
+    margin-top: -4rem;
+  }
+}
+
+.ctaBox {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 40, 37, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 5rem 2rem;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.title {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.btnPrimary {
+  padding: 1.25rem 3rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .content {
+    padding: 4rem 1.5rem;
+  }
+}

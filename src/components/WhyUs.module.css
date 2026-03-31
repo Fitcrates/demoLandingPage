@@ -1,0 +1,126 @@
+.whyUs {
+  padding: var(--section-padding);
+  background-color: var(--color-text-main);
+  color: #fff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition-smooth);
+}
+
+.listItem:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.listItem:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding-left: 2rem;
+  padding-right: 1rem;
+}
+
+.number {
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.05); /* very subtle watermark effect */
+  width: 140px;
+  font-weight: 300;
+  transition: var(--transition-smooth);
+}
+
+.listItem:hover .number {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+.itemContent {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-grow: 1;
+}
+
+.icon {
+  color: var(--color-primary-light);
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.listItem:hover .icon {
+  border-color: var(--color-primary-light);
+  transform: scale(1.1);
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .listItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+  }
+  
+  .listItem:hover {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: transparent;
+  }
+  
+  .number {
+    font-size: 3.5rem;
+    width: auto;
+    margin-bottom: -1.5rem;
+  }
+
+  .itemContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
