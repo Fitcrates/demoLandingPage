@@ -12,7 +12,7 @@
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
 
@@ -126,4 +126,30 @@
 
 .btn:hover {
   color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    height: 220px;
+  }
+
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+    right: 1.25rem;
+  }
+
+  .content {
+    margin: -2rem 0.75rem 0 0;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.15rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
 }

@@ -20,7 +20,7 @@
   /* Layout & Spacing */
   --container-width: 1280px;
   --section-padding: 7rem 2rem;
-  --section-padding-mobile: 4.5rem 1.5rem;
+  --section-padding-mobile: 3.5rem 1rem;
   
   /* Borders and Shadows */
   --radius-sm: 4px; /* More sophisticated slightly rounded */
@@ -114,8 +114,17 @@ img {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
   .section-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -158,4 +167,11 @@ img {
   color: var(--color-surface);
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
+}
+
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
 }

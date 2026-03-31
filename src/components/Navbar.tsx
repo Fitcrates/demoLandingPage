@@ -38,7 +38,7 @@ export default function Navbar() {
           <Link href="/#why-us">Dlaczego my</Link>
           <Link href="/#reviews">Opinie</Link>
         </nav>
-        <Link href="/#contact" className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}>
+        <Link href="/#contact" className={`btn btn-primary ${styles.ctaBtn}`}>
           Umów wizytę
         </Link>
       </div>

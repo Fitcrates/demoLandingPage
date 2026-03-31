@@ -1,5 +1,6 @@
 .ctaWrapper {
-  padding: 0 1.5rem var(--section-padding-mobile);
+  padding: 0 1rem;
+  padding-bottom: 3.5rem;
   background-color: var(--color-background);
   margin-top: -3rem;
   position: relative;
@@ -8,9 +9,14 @@
 
 @media (min-width: 768px) {
   .ctaWrapper {
-    padding: 0 1.5rem var(--section-padding);
+    padding: 0 1.5rem;
+    padding-bottom: 7rem;
     margin-top: -4rem;
   }
+}
+
+.container {
+  padding: 0; /* Remove double container padding */
 }
 
 .ctaBox {
@@ -66,11 +72,26 @@
 }
 
 @media (max-width: 768px) {
+  .ctaWrapper {
+    margin-top: -1.5rem;
+  }
+
   .title {
-    font-size: 2.2rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
   
   .content {
-    padding: 4rem 1.5rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .btnPrimary {
+    padding: 0.875rem 2rem;
+    font-size: 0.95rem;
   }
 }
