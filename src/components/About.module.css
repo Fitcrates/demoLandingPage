@@ -1,6 +1,7 @@
 .about {
   padding: var(--section-padding);
   background-color: var(--color-surface);
+  overflow: hidden; /* Contain GSAP x-transforms so they don't cause horizontal page overflow */
 }
 
 .container {
