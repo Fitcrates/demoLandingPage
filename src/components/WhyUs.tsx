@@ -49,16 +49,20 @@ export default function WhyUs({ serverData }: { serverData?: any }) {
   }, [serverData]);
 
   useEffect(() => {
-    const el = sectionRef.current;
     if (window.self !== window.top) {
       gsap.set(itemsRef.current, { opacity: 1, y: 0 });
       return;
     }
-    gsap.fromTo(itemsRef.current, { opacity: 0, y: 30 }, {
-      opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 75%" },
-    });
-  }, [data]);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(itemsRef.current, { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []); // Run once on mount only
 
   return (
     <section id="why-us" className={styles.whyUs} ref={sectionRef}>

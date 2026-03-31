@@ -21,7 +21,9 @@
   align-items: center;
   padding: 3rem 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transition: var(--transition-smooth);
+  /* Use GPU-friendly transform instead of padding for hover effect */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .listItem:last-child {
@@ -30,8 +32,8 @@
 
 .listItem:hover {
   background-color: rgba(255, 255, 255, 0.03);
-  padding-left: 2rem;
-  padding-right: 1rem;
+  /* translateX instead of padding change — GPU-accelerated, no layout reflow */
+  transform: translateX(8px);
 }
 
 .number {
@@ -41,7 +43,8 @@
   color: rgba(255, 255, 255, 0.05); /* very subtle watermark effect */
   width: 140px;
   font-weight: 300;
-  transition: var(--transition-smooth);
+  transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .listItem:hover .number {
@@ -66,7 +69,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: var(--transition-smooth);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .listItem:hover .icon {
@@ -107,8 +111,7 @@
   }
   
   .listItem:hover {
-    padding-left: 0;
-    padding-right: 0;
+    transform: none;
     background-color: transparent;
   }
   

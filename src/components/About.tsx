@@ -73,15 +73,21 @@ export default function About({ serverData }: { serverData?: any }) {
       return;
     }
 
-    gsap.fromTo(textRef.current, 
-      { opacity: 0, x: -50 },
-      { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: "top 75%" } }
-    );
-    gsap.fromTo(imageRef.current, 
-      { opacity: 0, x: 50 },
-      { opacity: 1, x: 0, duration: 1, scrollTrigger: { trigger: el, start: "top 75%" } }
-    );
-  }, [data]);
+    const ctx = gsap.context(() => {
+      gsap.fromTo(textRef.current, 
+        { opacity: 0, x: -50 },
+        { opacity: 1, x: 0, duration: 1, ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 75%", once: true } }
+      );
+      gsap.fromTo(imageRef.current, 
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 1, ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 75%", once: true } }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []); // Run once on mount only
 
   return (
     <section id="about" className={styles.about} ref={sectionRef}>
@@ -107,6 +113,7 @@ export default function About({ serverData }: { serverData?: any }) {
             src={imgSrc} 
             alt="Wnętrze salonu kosmetycznego" 
             className={styles.image}
+            loading="lazy"
           />
           <div className={styles.badge}>
             <span>{data.yearsOfExperience}</span>

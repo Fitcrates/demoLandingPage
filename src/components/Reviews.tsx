@@ -57,16 +57,20 @@ export default function Reviews({ serverData }: { serverData?: any }) {
   }, [serverData]);
 
   useEffect(() => {
-    const el = sectionRef.current;
     if (window.self !== window.top) {
       gsap.set(cardsRef.current, { opacity: 1, y: 0 });
       return;
     }
-    gsap.fromTo(cardsRef.current, { opacity: 0, y: 30 }, {
-      opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 80%" },
-    });
-  }, [data]);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardsRef.current, { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []); // Run once on mount only
 
   return (
     <section id="reviews" className={styles.reviews} ref={sectionRef}>
@@ -80,7 +84,7 @@ export default function Reviews({ serverData }: { serverData?: any }) {
               <Quote className={styles.quoteIcon} size={40} />
               <p className={styles.text}>"{review.text}"</p>
               <div className={styles.author}>
-                <img src={getImageUrl(review)} alt={review.name} className={styles.avatar} />
+                <img src={getImageUrl(review)} alt={review.name} className={styles.avatar} loading="lazy" />
                 <div className={styles.info}>
                   <p className={styles.name}>{review.name}</p>
                   <p className={styles.role}>{review.role}</p>

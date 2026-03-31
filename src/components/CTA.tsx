@@ -37,16 +37,20 @@ export default function CTA({ serverData }: { serverData?: any }) {
   }, [serverData]);
 
   useEffect(() => {
-    const el = sectionRef.current;
     if (window.self !== window.top) {
       gsap.set(contentRef.current, { opacity: 1, scale: 1 });
       return;
     }
-    gsap.fromTo(contentRef.current, { opacity: 0, scale: 0.95 }, {
-      opacity: 1, scale: 1, duration: 1, ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 80%" },
-    });
-  }, [data]);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(contentRef.current, { opacity: 0, scale: 0.95 }, {
+        opacity: 1, scale: 1, duration: 1, ease: "power2.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []); // Run once on mount only
 
   return (
     <section className={styles.ctaWrapper} ref={sectionRef}>

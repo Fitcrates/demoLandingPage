@@ -1,7 +1,7 @@
 .ctaWrapper {
-  padding: 0 1.5rem var(--section-padding-mobile); /* Top padding 0 for overlapping effect */
+  padding: 0 1.5rem var(--section-padding-mobile);
   background-color: var(--color-background);
-  margin-top: -3rem; /* Small overlap */
+  margin-top: -3rem;
   position: relative;
   z-index: 10;
 }
@@ -18,10 +18,11 @@
   background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* REMOVED background-attachment: fixed — causes full-page repaint on every scroll frame */
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-hover);
+  will-change: transform, opacity; /* Hint for GSAP animation */
 }
 
 .overlay {
@@ -30,8 +31,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(44, 40, 37, 0.5);
-  backdrop-filter: blur(2px);
+  background: rgba(44, 40, 37, 0.55);
+  /* REMOVED backdrop-filter: blur(2px) — expensive during scrolling, especially combined with fixed bg */
   z-index: 1;
 }
 

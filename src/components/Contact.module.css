@@ -84,7 +84,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   background-color: var(--color-background);
-  transition: var(--transition-smooth);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input:focus, .textarea:focus {

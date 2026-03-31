@@ -55,11 +55,16 @@ export default function Services({ serverData }: { serverData?: any }) {
       gsap.set(cardsRef.current, { opacity: 1, y: 0 });
       return;
     }
-    gsap.fromTo(cardsRef.current, { opacity: 0, y: 50 }, {
-      opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 80%" },
-    });
-  }, [data]);
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardsRef.current, { opacity: 0, y: 50 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 80%", once: true },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []); // Run once on mount only
 
   return (
     <section id="services" className={styles.services} ref={sectionRef}>
@@ -73,7 +78,7 @@ export default function Services({ serverData }: { serverData?: any }) {
               <div className={styles.imageContainer}>
                 <div className={styles.imageWrapper}>
                   <div className={styles.overlay}></div>
-                  <img src={getImageUrl(service)} alt={service.title} className={styles.image} />
+                  <img src={getImageUrl(service)} alt={service.title} className={styles.image} loading="lazy" />
                 </div>
                 <div className={styles.iconWrapper}>
                   {iconMap[service.iconName] ?? <Sparkles size={32} strokeWidth={1.5} />}

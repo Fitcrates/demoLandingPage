@@ -29,8 +29,13 @@
   --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.03);
   --shadow-hover: 0 20px 50px -15px rgba(0,0,0,0.06);
   
-  /* Transitions */
-  --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Transitions — specific properties only, never 'all' (avoids layout thrashing) */
+  --transition-smooth: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @media (max-width: 768px) {
@@ -75,7 +80,7 @@ p {
 a {
   text-decoration: none;
   color: inherit;
-  transition: var(--transition-smooth);
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 ul {
@@ -125,7 +130,7 @@ img {
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border: none;
   text-decoration: none;
 }

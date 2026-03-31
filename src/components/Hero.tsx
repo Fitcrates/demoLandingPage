@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import styles from "./Hero.module.css";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
@@ -29,6 +28,7 @@ export default function Hero({ serverData }: { serverData?: any }) {
     secondaryButtonText: initial.secondaryButtonText || FALLBACK.secondaryButtonText,
   });
   const [bgImage, setBgImage] = useState(getImageUrl(initial));
+  const [visible, setVisible] = useState(false);
 
   // Update when serverData changes (live revalidation from SanityLive)
   const prevRef = useRef(serverData);
@@ -45,32 +45,30 @@ export default function Hero({ serverData }: { serverData?: any }) {
     }
   }, [serverData]);
 
+  // Trigger entrance animation on mount
+  useEffect(() => {
+    // Small delay so the browser paints the initial frame first
+    const id = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <section className={styles.hero} style={{ backgroundImage: `url(${bgImage})` }}>
       <div className={styles.overlay}></div>
       <div className={`container ${styles.content}`}>
-        <motion.h1 
-          className={styles.title}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+        <h1 
+          className={`${styles.title} ${visible ? styles.fadeIn : styles.fadeOut}`}
           dangerouslySetInnerHTML={{ __html: data.title }}
         />
         
-        <motion.p 
-          className={styles.subtitle}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        <p className={`${styles.subtitle} ${visible ? styles.fadeIn : styles.fadeOut}`}
+           style={{ transitionDelay: '0.15s' }}
         >
           {data.subtitle}
-        </motion.p>
+        </p>
         
-        <motion.div 
-          className={styles.buttons}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        <div className={`${styles.buttons} ${visible ? styles.fadeIn : styles.fadeOut}`}
+             style={{ transitionDelay: '0.3s' }}
         >
           <Link href="/#contact" className="btn btn-primary">
             {data.primaryButtonText}
@@ -78,7 +76,7 @@ export default function Hero({ serverData }: { serverData?: any }) {
           <Link href="/#services" className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
             {data.secondaryButtonText}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

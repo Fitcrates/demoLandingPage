@@ -293,7 +293,7 @@ export default async function ServicePage({
             </div>
 
             <div className={styles.backLink}>
-              <Link href="/#services" className="btn btn-outline text-black">
+              <Link href="/#services" className="btn btn-outline">
                 ← Wróć do wszystkich usług
               </Link>
             </div>

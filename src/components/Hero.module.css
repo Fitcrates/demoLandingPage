@@ -4,10 +4,9 @@
   min-height: 600px;
   display: flex;
   align-items: center;
-  background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* REMOVED background-attachment: fixed — causes full-page repaint on every scroll frame */
 }
 
 .overlay {
@@ -46,6 +45,18 @@
 .buttons {
   display: flex;
   gap: 1rem;
+}
+
+/* CSS entrance animations (replaces framer-motion) */
+.fadeOut {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
 @media (max-width: 768px) {

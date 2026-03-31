@@ -1,28 +1,36 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const ticking = useRef(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  const handleScroll = useCallback(() => {
+    if (!ticking.current) {
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50);
+        ticking.current = false;
+      });
+    }
   }, []);
 
+  useEffect(() => {
+    // Check initial state
+    setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
   return (
-    <motion.header 
+    <header
       className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo}>
-          Glow & Serenity
+          Glow &amp; Serenity
         </Link>
         <nav className={styles.nav}>
           <Link href="/#about">O nas</Link>
@@ -34,6 +42,6 @@ export default function Navbar() {
           Umów wizytę
         </Link>
       </div>
-    </motion.header>
+    </header>
   );
 }
