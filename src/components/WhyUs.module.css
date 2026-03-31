@@ -19,9 +19,9 @@
 .listItem {
   display: flex;
   align-items: center;
+  gap: 0;
   padding: 3rem 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  /* Use GPU-friendly transform instead of padding for hover effect */
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
               background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -32,16 +32,22 @@
 
 .listItem:hover {
   background-color: rgba(255, 255, 255, 0.03);
-  /* translateX instead of padding change — GPU-accelerated, no layout reflow */
   transform: translateX(8px);
+}
+
+/* Desktop: topRow holds number + icon in a row, textWrapper beside it */
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
 }
 
 .number {
   font-family: var(--font-heading);
   font-size: 4.5rem;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.05); /* very subtle watermark effect */
-  width: 140px;
+  color: rgba(255, 255, 255, 0.05);
   font-weight: 300;
   flex-shrink: 0;
   transition: color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
@@ -51,13 +57,6 @@
 .listItem:hover .number {
   color: var(--color-primary);
   opacity: 0.8;
-}
-
-.itemContent {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  flex-grow: 1;
 }
 
 .icon {
@@ -82,6 +81,7 @@
 .textWrapper {
   display: flex;
   flex-direction: column;
+  margin-left: 2rem;
 }
 
 .title {
@@ -105,8 +105,6 @@
   }
 
   .listItem {
-    /* Stack: top row = number + icon, below = title + description */
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
@@ -117,28 +115,23 @@
     transform: none;
     background-color: transparent;
   }
-  
-  .number {
-    font-size: 2.5rem;
-    width: auto;
-    display: inline-flex;
+
+  /* Row 1: number + icon side by side */
+  .topRow {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    margin-bottom: 0;
-    /* Number sits next to icon via the row wrapper below */
+    gap: 1rem;
+    margin-bottom: 0.75rem;
   }
 
-  .itemContent {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    width: 100%;
+  .number {
+    font-size: 2.5rem;
   }
 
   .icon {
     width: 44px;
     height: 44px;
-    flex-shrink: 0;
-    margin-bottom: 1rem;
   }
 
   .icon svg {
@@ -146,7 +139,9 @@
     height: 22px;
   }
 
+  /* Row 2 + 3: title then description below */
   .textWrapper {
+    margin-left: 0;
     width: 100%;
   }
 

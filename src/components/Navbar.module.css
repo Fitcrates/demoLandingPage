@@ -86,6 +86,13 @@
 @media (max-width: 768px) {
   .header {
     padding: 0.75rem 0;
+    /* Override slideDown — use fade only to prevent horizontal overflow shift */
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .header.scrolled {

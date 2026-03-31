@@ -77,15 +77,15 @@ export default function WhyUs({ serverData }: { serverData?: any }) {
         <div className={styles.list}>
           {data.features.map((item: any, index: number) => (
             <div key={index} className={styles.listItem} ref={el => { itemsRef.current[index] = el; }}>
-              <div className={styles.number}>0{index + 1}</div>
-              <div className={styles.itemContent}>
+              <div className={styles.topRow}>
+                <div className={styles.number}>0{index + 1}</div>
                 <div className={styles.icon}>
                   {iconMap[item.icon] ?? <Circle size={32} strokeWidth={1} />}
                 </div>
-                <div className={styles.textWrapper}>
-                  <h3 className={styles.title}>{item.title}</h3>
-                  <p className={styles.description}>{item.description}</p>
-                </div>
+              </div>
+              <div className={styles.textWrapper}>
+                <h3 className={styles.title}>{item.title}</h3>
+                <p className={styles.description}>{item.description}</p>
               </div>
             </div>
           ))}

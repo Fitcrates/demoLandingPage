@@ -6,6 +6,7 @@
   align-items: center;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
   /* REMOVED background-attachment: fixed — causes full-page repaint on every scroll frame */
 }
 
