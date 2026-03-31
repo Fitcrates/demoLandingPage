@@ -62,12 +62,7 @@
 @media (max-width: 768px) {
   .hero {
     min-height: 100svh;
-    align-items: flex-end;
-    padding-bottom: 3rem;
-  }
-
-  .content {
-    padding-top: 5rem; /* Clear navbar */
+    padding-top: 5rem; /* Clear fixed navbar */
   }
 
   .title {
@@ -83,10 +78,5 @@
   .buttons {
     flex-direction: column;
     gap: 0.75rem;
-  }
-
-  .buttons .btn {
-    width: 100%;
-    text-align: center;
   }
 }
