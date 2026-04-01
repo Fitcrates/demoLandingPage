@@ -1,5 +1,5 @@
 import { createClient } from 'next-sanity'
-import { apiVersion, dataset, projectId, useCdn } from '../env'
+import { apiVersion, dataset, projectId, useCdn, token } from '../env'
 
 // If projectId is not configured, we create a dummy client
 // whose .fetch() always resolves to null — components fall back
@@ -17,11 +17,14 @@ function buildClient() {
     dataset,
     projectId,
     useCdn,
-    // Stega is DISABLED globally. It was causing:
-    // 1) "Open in Studio" hover overlays on the regular site
-    // 2) Infinite re-render loops (Maximum update depth) with GSAP animations
-    // The Presentation tool sidebar uses resolve.locations instead.
-    // Live preview uses client.listen() in each component.
+    token,
+    perspective: 'published',
+    // Stega is conditionally enabled for visual editing
+    // Only active when inside Sanity Studio's Presentation tool iframe
+    stega: {
+      enabled: false, // Will be overridden by client.withConfig() when needed
+      studioUrl: '/studio',
+    },
   })
 }
 

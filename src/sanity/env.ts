@@ -13,4 +13,7 @@ export const dataset =
 export const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''
 
+export const token =
+  process.env.SANITY_API_TOKEN || ''
+
 export const useCdn = false
