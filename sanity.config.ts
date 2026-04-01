@@ -27,7 +27,7 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           {
             route: '/',
-            filter: '_type in ["hero", "about", "services", "whyus", "reviews", "cta", "contact", "footer"]',
+            filter: '_type in ["navbar", "hero", "about", "services", "whyus", "reviews", "cta", "contact", "footer"]',
           },
           {
             route: '/uslugi/:slug',
@@ -36,6 +36,7 @@ export default defineConfig({
         ]),
         // locations: tells Structure view where each doc type is used
         locations: {
+          navbar: homepageLocation,
           hero: homepageLocation,
           about: homepageLocation,
           services: homepageLocation,

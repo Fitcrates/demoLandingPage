@@ -1,6 +1,7 @@
 // src/sanity/schema.ts
 import { type SchemaTypeDefinition } from 'sanity'
 
+import navbar from './schemas/navbar'
 import hero from './schemas/hero'
 import about from './schemas/about'
 import services from './schemas/services'
@@ -12,5 +13,5 @@ import footer from './schemas/footer'
 import servicePage from './schemas/servicePage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [hero, about, services, whyus, reviews, cta, contact, footer, servicePage],
+  types: [navbar, hero, about, services, whyus, reviews, cta, contact, footer, servicePage],
 }

@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { sanityFetch } from "@/sanity/lib/live";
 
 // GROQ queries for each section
+const NAVBAR_QUERY = `*[_type == "navbar"][0]{ logoText, navLinks[]{ label, href }, ctaText, ctaLink }`;
 const HERO_QUERY = `*[_type == "hero"][0]{ title, subtitle, primaryButtonText, secondaryButtonText, backgroundImage }`;
 const ABOUT_QUERY = `*[_type == "about"][0]{ title, description1, description2, values, yearsOfExperience, yearsLabel, buttonText, image }`;
 const SERVICES_QUERY = `*[_type == "services"][0]{ title, subtitle, serviceList[]{ title, slug, description, iconName, image } }`;
@@ -21,7 +22,8 @@ const FOOTER_QUERY = `*[_type == "footer"][0]{ description, copyrightText, socia
 
 export default async function Home() {
   // Fetch all sections in parallel via sanityFetch (server-side, with live revalidation)
-  const [hero, about, services, whyus, reviews, cta, contact, footer] = await Promise.all([
+  const [navbar, hero, about, services, whyus, reviews, cta, contact, footer] = await Promise.all([
+    sanityFetch({ query: NAVBAR_QUERY }),
     sanityFetch({ query: HERO_QUERY }),
     sanityFetch({ query: ABOUT_QUERY }),
     sanityFetch({ query: SERVICES_QUERY }),
@@ -34,7 +36,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar serverData={navbar.data} />
       <main style={{ overflowX: 'clip' }}>
         <Hero serverData={hero.data} />
         <About serverData={about.data} />
