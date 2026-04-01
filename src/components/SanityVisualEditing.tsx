@@ -1,6 +1,7 @@
 "use client";
 
 import { VisualEditing } from "next-sanity/visual-editing";
+import { SanityLive } from "@/sanity/lib/live";
 import { useEffect, useState } from "react";
 
 export default function SanityVisualEditing() {
@@ -12,5 +13,14 @@ export default function SanityVisualEditing() {
 
   if (!isIframe) return null;
 
-  return <VisualEditing />;
+  return (
+    <>
+      <VisualEditing />
+      <SanityLive 
+        refreshOnMount={false}
+        refreshOnFocus={false}
+        refreshOnReconnect={false}
+      />
+    </>
+  );
 }
