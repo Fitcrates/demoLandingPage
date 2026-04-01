@@ -67,16 +67,7 @@ export default async function RootLayout({
           Przejdź do głównej treści
         </a>
         {children}
-        {draft.isEnabled && (
-          <>
-            <SanityLive 
-              refreshOnMount={false}
-              refreshOnFocus={false}
-              refreshOnReconnect={false}
-            />
-            <SanityVisualEditing />
-          </>
-        )}
+        {draft.isEnabled && <SanityVisualEditing />}
       </body>
     </html>
   );
