@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import SanityVisualEditing from "@/components/SanityVisualEditing";
-import DisableDraftMode from "@/components/DisableDraftMode";
 import { SanityLive } from "@/sanity/lib/live";
 import { draftMode } from "next/headers";
 import "./globals.css";
@@ -25,12 +24,7 @@ export default async function RootLayout({
         {/* SanityLive handles real-time content revalidation from Sanity Content Lake */}
         <SanityLive />
         {/* VisualEditing enables Presentation tool communication (only active inside Studio iframe) */}
-        {draft.isEnabled && (
-          <>
-            <SanityVisualEditing />
-            <DisableDraftMode />
-          </>
-        )}
+        {draft.isEnabled && <SanityVisualEditing />}
       </body>
     </html>
   );
