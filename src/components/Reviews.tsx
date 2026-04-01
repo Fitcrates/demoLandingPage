@@ -27,7 +27,7 @@ function getImageUrl(data: any): string {
 
 export default function Reviews({ serverData }: { serverData?: any }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
 
   const [data, setData] = useState(() => {
     if (!serverData) return FALLBACK;
@@ -80,17 +80,26 @@ export default function Reviews({ serverData }: { serverData?: any }) {
         
         <div className={styles.grid}>
           {data.reviews.map((review: any, index: number) => (
-            <div key={index} className={styles.card} ref={el => { cardsRef.current[index] = el; }}>
-              <Quote className={styles.quoteIcon} size={40} />
-              <p className={styles.text}>"{review.text}"</p>
+            <article key={index} className={styles.card} ref={el => { cardsRef.current[index] = el; }}>
+              <Quote className={styles.quoteIcon} size={40} aria-hidden="true" />
+              <blockquote className={styles.text}>
+                <p>"{review.text}"</p>
+              </blockquote>
               <div className={styles.author}>
-                <img src={getImageUrl(review)} alt={review.name} className={styles.avatar} loading="lazy" />
+                <img 
+                  src={getImageUrl(review)} 
+                  alt={`Zdjęcie ${review.name}`} 
+                  className={styles.avatar} 
+                  loading="lazy"
+                  width="60"
+                  height="60"
+                />
                 <div className={styles.info}>
                   <p className={styles.name}>{review.name}</p>
                   <p className={styles.role}>{review.role}</p>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

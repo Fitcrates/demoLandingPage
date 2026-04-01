@@ -60,22 +60,31 @@ export default function Footer({ serverData }: { serverData?: any }) {
   };
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} role="contentinfo">
       <div className={`container ${styles.grid}`}>
         <div className={styles.brand}>
           <h3 className={styles.logo}>Glow & Serenity</h3>
           <p className={styles.description}>{data.description}</p>
-          <div className={styles.socials}>
+          <div className={styles.socials} role="navigation" aria-label="Media społecznościowe">
             {data.socialLinks.map((social: any, idx: number) => {
               const Icon = getPlatformIcon(social.platform, 20);
               return Icon ? (
-                <a key={idx} href={social.url} className={styles.socialLink} target="_blank" rel="noopener noreferrer">{Icon}</a>
+                <a 
+                  key={idx} 
+                  href={social.url} 
+                  className={styles.socialLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={`Odwiedź nasz profil na ${social.platform}`}
+                >
+                  {Icon}
+                </a>
               ) : null;
             })}
           </div>
         </div>
 
-        <div className={styles.linksColumn}>
+        <nav className={styles.linksColumn} aria-label="Nawigacja stopki - skróty">
           <h4 className={styles.title}>Na skróty</h4>
           <ul className={styles.links}>
             <li><Link href="/#about">O nas</Link></li>
@@ -84,16 +93,16 @@ export default function Footer({ serverData }: { serverData?: any }) {
             <li><Link href="/#reviews">Opinie</Link></li>
             <li><Link href="/#contact">Kontakt</Link></li>
           </ul>
-        </div>
+        </nav>
 
-        <div className={styles.linksColumn}>
+        <nav className={styles.linksColumn} aria-label="Nawigacja stopki - usługi">
           <h4 className={styles.title}>Usługi</h4>
           <ul className={styles.links}>
             {data.serviceLinks.map((link: any, idx: number) => (
               <li key={idx}><Link href={link.url}>{link.label}</Link></li>
             ))}
           </ul>
-        </div>
+        </nav>
 
         <div className={styles.mapColumn}>
           <h4 className={styles.title}>Jak dojechać?</h4>
@@ -102,6 +111,8 @@ export default function Footer({ serverData }: { serverData?: any }) {
               src="https://maps.google.com/maps?q=Warszawa,%20Pi%C4%99kna%2012&t=&z=15&ie=UTF8&iwloc=&output=embed"
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa lokalizacji salonu Glow & Serenity w Warszawie"
+              aria-label="Interaktywna mapa Google pokazująca lokalizację salonu przy ulicy Piękna 12 w Warszawie"
             ></iframe>
           </div>
         </div>
@@ -110,7 +121,7 @@ export default function Footer({ serverData }: { serverData?: any }) {
       <div className={styles.bottom}>
         <div className="container">
           <p>&copy; {new Date().getFullYear()} {data.copyrightText}</p>
-          <p>Realizacja appcrates.pl</p>
+          <p>Realizacja <a href="https://appcrates.pl" target="_blank" rel="noopener noreferrer">appcrates.pl</a></p>
         </div>
       </div>
     </footer>

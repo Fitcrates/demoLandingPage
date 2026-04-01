@@ -37,7 +37,7 @@ export default async function Home() {
   return (
     <>
       <Navbar serverData={navbar.data} />
-      <main style={{ overflowX: 'clip' }}>
+      <main id="main-content" style={{ overflowX: 'clip' }}>
         <Hero serverData={hero.data} />
         <About serverData={about.data} />
         <Services serverData={services.data} />

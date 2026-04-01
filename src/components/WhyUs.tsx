@@ -27,7 +27,7 @@ const FALLBACK = {
 
 export default function WhyUs({ serverData }: { serverData?: any }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const itemsRef = useRef<(HTMLElement | null)[]>([]);
 
   const initial = serverData || FALLBACK;
   const [data, setData] = useState({
@@ -76,10 +76,10 @@ export default function WhyUs({ serverData }: { serverData?: any }) {
 
         <div className={styles.list}>
           {data.features.map((item: any, index: number) => (
-            <div key={index} className={styles.listItem} ref={el => { itemsRef.current[index] = el; }}>
+            <article key={index} className={styles.listItem} ref={el => { itemsRef.current[index] = el; }}>
               <div className={styles.topRow}>
-                <div className={styles.number}>0{index + 1}</div>
-                <div className={styles.icon}>
+                <div className={styles.number} aria-hidden="true">0{index + 1}</div>
+                <div className={styles.icon} aria-hidden="true">
                   {iconMap[item.icon] ?? <Circle size={32} strokeWidth={1} />}
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default function WhyUs({ serverData }: { serverData?: any }) {
                 <h3 className={styles.title}>{item.title}</h3>
                 <p className={styles.description}>{item.description}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

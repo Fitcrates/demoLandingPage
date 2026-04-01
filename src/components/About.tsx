@@ -111,13 +111,15 @@ export default function About({ serverData }: { serverData?: any }) {
         <div className={styles.imageWrapper} ref={imageRef}>
           <img 
             src={imgSrc} 
-            alt="Wnętrze salonu kosmetycznego" 
+            alt="Eleganckie wnętrze salonu kosmetycznego Glow & Serenity z luksusowymi meblami i profesjonalnym sprzętem" 
             className={styles.image}
             loading="lazy"
+            width="600"
+            height="800"
           />
-          <div className={styles.badge}>
-            <span>{data.yearsOfExperience}</span>
-            <small>{data.yearsLabel}</small>
+          <div className={styles.badge} aria-label={`${data.yearsOfExperience} ${data.yearsLabel}`}>
+            <span aria-hidden="true">{data.yearsOfExperience}</span>
+            <small aria-hidden="true">{data.yearsLabel}</small>
           </div>
         </div>
       </div>

@@ -59,17 +59,18 @@ export default function Navbar({ serverData }: { serverData?: any }) {
   return (
     <header
       className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
+      role="banner"
     >
       <div className={`container ${styles.navContainer}`}>
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} aria-label="Glow & Serenity - Strona główna">
           {data.logoText}
         </Link>
-        <nav className={styles.nav}>
+        <nav className={styles.nav} role="navigation" aria-label="Nawigacja główna">
           {data.navLinks.map((link: any, i: number) => (
             <Link key={i} href={link.href}>{link.label}</Link>
           ))}
         </nav>
-        <Link href={data.ctaLink} className={`btn btn-primary ${styles.ctaBtn}`}>
+        <Link href={data.ctaLink} className={`btn btn-primary ${styles.ctaBtn}`} aria-label="Umów wizytę w salonie">
           {data.ctaText}
         </Link>
       </div>

@@ -80,21 +80,60 @@ export default function Contact({ serverData }: { serverData?: any }) {
         </div>
 
         <div className={styles.formColumn}>
-          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+          <form className={styles.form} onSubmit={(e) => e.preventDefault()} aria-label="Formularz kontaktowy">
             <h3 className={styles.formTitle}>{data.formTitle}</h3>
             <div className={styles.inputGroup}>
-              <input type="text" placeholder="Imię i nazwisko" className={styles.input} required />
+              <label htmlFor="contact-name" className="sr-only">Imię i nazwisko</label>
+              <input 
+                type="text" 
+                id="contact-name"
+                name="name"
+                placeholder="Imię i nazwisko" 
+                className={styles.input} 
+                required 
+                aria-required="true"
+                autoComplete="name"
+              />
             </div>
             <div className={styles.inputGroup}>
-              <input type="email" placeholder="Adres email" className={styles.input} required />
+              <label htmlFor="contact-email" className="sr-only">Adres email</label>
+              <input 
+                type="email" 
+                id="contact-email"
+                name="email"
+                placeholder="Adres email" 
+                className={styles.input} 
+                required 
+                aria-required="true"
+                autoComplete="email"
+              />
             </div>
             <div className={styles.inputGroup}>
-              <input type="tel" placeholder="Numer telefonu" className={styles.input} required />
+              <label htmlFor="contact-phone" className="sr-only">Numer telefonu</label>
+              <input 
+                type="tel" 
+                id="contact-phone"
+                name="phone"
+                placeholder="Numer telefonu" 
+                className={styles.input} 
+                required 
+                aria-required="true"
+                autoComplete="tel"
+              />
             </div>
             <div className={styles.inputGroup}>
-              <textarea placeholder="W czym możemy pomóc?" rows={5} className={styles.textarea} required></textarea>
+              <label htmlFor="contact-message" className="sr-only">Wiadomość</label>
+              <textarea 
+                id="contact-message"
+                name="message"
+                placeholder="W czym możemy pomóc?" 
+                rows={5} 
+                className={styles.textarea} 
+                required
+                aria-required="true"
+              ></textarea>
             </div>
-            <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>
+            <button type="submit" className="btn btn-primary" style={{ width: "100%" }} aria-label="Wyślij formularz kontaktowy">
               Wyślij wiadomość
             </button>
           </form>

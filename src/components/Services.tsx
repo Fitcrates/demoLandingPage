@@ -36,7 +36,7 @@ function getImageUrl(item: any): string {
 
 export default function Services({ serverData }: { serverData?: any }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef  = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef  = useRef<(HTMLElement | null)[]>([]);
 
   const initial = serverData?.serviceList?.length ? serverData : FALLBACK;
   const [data, setData] = useState(initial);
@@ -74,22 +74,31 @@ export default function Services({ serverData }: { serverData?: any }) {
 
         <div className={styles.grid}>
           {data.serviceList.map((service: any, index: number) => (
-            <div key={service.slug ?? index} className={styles.card} ref={(el) => { cardsRef.current[index] = el; }}>
+            <article key={service.slug ?? index} className={styles.card} ref={(el) => { cardsRef.current[index] = el; }}>
               <div className={styles.imageContainer}>
                 <div className={styles.imageWrapper}>
-                  <div className={styles.overlay}></div>
-                  <img src={getImageUrl(service)} alt={service.title} className={styles.image} loading="lazy" />
+                  <div className={styles.overlay} aria-hidden="true"></div>
+                  <img 
+                    src={getImageUrl(service)} 
+                    alt={`${service.title} - profesjonalne zabiegi w salonie Glow & Serenity`} 
+                    className={styles.image} 
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
                 </div>
-                <div className={styles.iconWrapper}>
+                <div className={styles.iconWrapper} aria-hidden="true">
                   {iconMap[service.iconName] ?? <Sparkles size={32} strokeWidth={1.5} />}
                 </div>
               </div>
               <div className={styles.content}>
                 <h3 className={styles.title}>{service.title}</h3>
                 <p className={styles.description}>{service.description}</p>
-                <Link href={`/uslugi/${service.slug}`} className={styles.btn}>Czytaj więcej</Link>
+                <Link href={`/uslugi/${service.slug}`} className={styles.btn} aria-label={`Dowiedz się więcej o usłudze: ${service.title}`}>
+                  Czytaj więcej
+                </Link>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

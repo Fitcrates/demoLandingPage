@@ -53,8 +53,12 @@ export default function Hero({ serverData }: { serverData?: any }) {
   }, []);
 
   return (
-    <section className={styles.hero} style={{ backgroundImage: `url(${bgImage})` }}>
-      <div className={styles.overlay}></div>
+    <section 
+      className={styles.hero} 
+      style={{ backgroundImage: `url(${bgImage})` }}
+      aria-label="Sekcja powitalna"
+    >
+      <div className={styles.overlay} aria-hidden="true"></div>
       <div className={`container ${styles.content}`}>
         <h1 
           className={`${styles.title} ${visible ? styles.fadeIn : styles.fadeOut}`}
@@ -70,10 +74,10 @@ export default function Hero({ serverData }: { serverData?: any }) {
         <div className={`${styles.buttons} ${visible ? styles.fadeIn : styles.fadeOut}`}
              style={{ transitionDelay: '0.3s' }}
         >
-          <Link href="/#contact" className="btn btn-primary">
+          <Link href="/#contact" className="btn btn-primary" aria-label="Przejdź do formularza kontaktowego aby umówić wizytę">
             {data.primaryButtonText}
           </Link>
-          <Link href="/#services" className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }}>
+          <Link href="/#services" className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }} aria-label="Zobacz pełną ofertę naszych usług">
             {data.secondaryButtonText}
           </Link>
         </div>
