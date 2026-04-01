@@ -6,13 +6,7 @@ import { token } from '../env'
 // 1) sanityFetch — a server-side fetch function for React Server Components
 // 2) SanityLive — a component that auto-revalidates content in real time
 export const { sanityFetch, SanityLive } = defineLive({
-  client: client.withConfig({
-    token,
-    perspective: 'published',
-    useCdn: false,
-    stega: {
-      enabled: true,
-      studioUrl: '/studio',
-    },
-  }),
+  client,
+  serverToken: token,
+  browserToken: token,
 })

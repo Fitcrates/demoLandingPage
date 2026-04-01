@@ -19,11 +19,9 @@ function buildClient() {
     useCdn,
     token,
     perspective: 'published',
-    // Stega is conditionally enabled for visual editing
-    // Only active when inside Sanity Studio's Presentation tool iframe
     stega: {
-      enabled: false, // Will be overridden by client.withConfig() when needed
-      studioUrl: '/studio',
+      enabled: true,
+      studioUrl: typeof location === 'undefined' ? 'http://localhost:3000/studio' : `${location.origin}/studio`,
     },
   })
 }

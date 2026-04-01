@@ -4,7 +4,7 @@ import { Check, Sparkles, Flower2, Droplets, Gem, ArrowRight } from "lucide-reac
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./ServiceDetails.module.css";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { urlForImage } from "@/sanity/lib/image";
 
 // ── types ─────────────────────────────────────────────────────────────────────
@@ -185,7 +185,8 @@ export default async function ServicePage({
   // Try to load from Sanity
   let sanityData: ServicePageData | null = null;
   try {
-    sanityData = await client.fetch(QUERY, { slug });
+    const result = await sanityFetch({ query: QUERY, params: { slug } });
+    sanityData = result.data;
   } catch {
     // Sanity not configured yet — will use fallback
   }
